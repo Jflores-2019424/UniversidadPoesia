@@ -1,9 +1,13 @@
 'use strict'
 
-const User = require('../models/user.model')
+const moment = require('moment/moment');
+const User = require('../models/user.model') 
 
 const createUser = async (req,res)=>{
     const {carnet} = req.body;
+    const todayDate = new Date();
+    const fiveDays = new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000))
+
     try{
        let user = await User.findOne({carnet: carnet})
        if(user){
@@ -13,7 +17,10 @@ const createUser = async (req,res)=>{
             user: user
         })
        }
+
        user = new User(req.body)
+       user.inscriptionDate = moment(todayDate, 'DD-MM-YYYY').format('MM-DD-YYYY')
+       user.contestDay = moment(fiveDays, 'DD-MM-YYYY').format('MM-DD-YYYY')
     
        user = await user.save()
 

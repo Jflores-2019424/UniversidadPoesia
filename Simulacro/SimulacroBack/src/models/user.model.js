@@ -24,7 +24,8 @@ const UserSchema = Schema({
         required: true
     },
     birthDate: {
-        type: String,
+        type: Date,
+        format: "DD-MM-YYYY",
         required: true
     },
     course: {
@@ -36,11 +37,12 @@ const UserSchema = Schema({
         required: true
     },
     inscriptionDate: {
-        type: String,
+        type: Date,
         required: true
     },
     contestDay: {
-        type: String,
+        type: Date,
+        format: "DD-MM-YYYY",
         required: true
     }
 })
